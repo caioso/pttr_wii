@@ -17,9 +17,17 @@ include $(DEVKITPPC)/wii_rules
 #---------------------------------------------------------------------------------
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
-SOURCES		:=	source source/base source/utils source/gfx
+SOURCES		:=	source/base \
+							source/base/control \
+							source/base/graphics \
+							source/game \
+							source/game/commons \
+							source/interfaces \
+							source/gfx \
+							source/utils \
+							source
 DATA		:=	data
-INCLUDES	:=
+INCLUDES	:= $(SOURCES)
 
 #---------------------------------------------------------------------------------
 # options for code generation
@@ -52,7 +60,7 @@ ifneq ($(BUILD),$(notdir $(CURDIR)))
 export OUTPUT	:=	$(CURDIR)/$(TARGET)
 
 export VPATH	:=	$(foreach dir,$(SOURCES),$(CURDIR)/$(dir)) \
-					$(foreach dir,$(DATA),$(CURDIR)/$(dir))
+					$(foreach dir,$(DATA),$(CURDIR)/$(dir)) \
 
 export DEPSDIR	:=	$(CURDIR)/$(BUILD)
 

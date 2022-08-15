@@ -1,0 +1,28 @@
+#pragma once
+
+/* includes */
+#include <vector>
+
+namespace base::graphics {
+  class Renderer;
+}
+
+namespace interfaces {
+  class Renderable {
+  friend base::graphics::Renderer;
+  public:
+    /* public methods */
+    virtual ~Renderable(void) = default;
+    void add_child(Renderable * child);
+
+    /* abstract methods */
+    virtual void render(float offset_x, float offset_y) = 0;
+
+    /* Public attributes */
+    float x;
+    float y;
+
+  private:
+    std::vector<Renderable *> children;
+  };
+}
