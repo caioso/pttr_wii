@@ -15,7 +15,11 @@ namespace base::graphics {
     static void render(void);
 
   private:
-    /* private members */
+    /* private methods */
+    static void render_parent_and_children(
+      interfaces::Renderable * parent, float offset_x, float offset_y);
+
+    /* private attributes */
     inline static Stage main_stage;
   };
 }

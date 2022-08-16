@@ -6,6 +6,7 @@
 #include "base/control/scheduler.h"
 #include "base/graphics/renderer.h"
 #include "game/commons/block.h"
+#include "game/commons/matrix.h"
 #include "utils/draw.h"
 
 using namespace base::control;
@@ -25,11 +26,10 @@ int main() {
   Scheduler::initialize();
 
   /* test only */
-  Block test_block(10.0f, 10.0f, 20.0f, 20.0f, Draw::make_rgba(255, 0, 0, 255));
-
-  /* Setup gameobject */
-  Renderer::add_child_to_stage(&test_block);
-  Scheduler::schedule(&test_block);
+  Matrix p1_matrix(30, 30);
+  p1_matrix.set_block(4, 4);
+  /* Setup game object */
+  Renderer::add_child_to_stage(&p1_matrix);
 
   while(true) {
     /* Clear screen */

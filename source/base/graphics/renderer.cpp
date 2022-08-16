@@ -17,13 +17,19 @@ namespace base::graphics {
 
     /* render stage elements */
     /* @TODO: Detect loops in the children lists */
-    Renderer::main_stage.render(0.0f, 0.0f);
-
-    for (auto child : Renderer::main_stage.children) {
-      child->render(0.0f, 0.0f);
-    }
+    Renderer::render_parent_and_children(&Renderer::main_stage, 0.0f, 0.0f);
 
     /* renderer call */
     GRRLIB_Render();
+  }
+
+  void Renderer::render_parent_and_children(
+    interfaces::Renderable * parent, float offset_x, float offset_y) {
+    parent->render(offset_x, offset_y);
+
+    for (auto child : parent->children) {
+      Renderer::render_parent_and_children(
+        child, parent->x, parent->y);
+    }
   }
 }

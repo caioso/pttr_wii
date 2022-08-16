@@ -3,8 +3,8 @@
 
 namespace base {
   BasicGameObject::BasicGameObject(float x, float y) {
-    this->x = 0.0f;
-    this->y = 0.0f;
+    this->x = x;
+    this->y = y;
   }
 
   void BasicGameObject::render(float offset_x, float offset_y) { }
