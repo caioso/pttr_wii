@@ -1,6 +1,7 @@
 #pragma once
 
 /* includes */
+#include <algorithm>
 #include <vector>
 
 namespace base::graphics {
@@ -14,6 +15,7 @@ namespace interfaces {
     /* public methods */
     virtual ~Renderable(void) = default;
     void add_child(Renderable * child);
+    void remove_child(Renderable * child);
 
     /* abstract methods */
     virtual void render(float offset_x, float offset_y) = 0;

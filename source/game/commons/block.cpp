@@ -5,8 +5,18 @@
 using namespace utils;
 
 namespace game::commons {
-  Block::Block(float x, float y, float width, float height, uint32_t color) :
+  Block::Block(void) :
+    base::BasicGameObject(0, 0),
+    id(std::numeric_limits<size_t>::max()),
+    width(0),
+    height(0),
+    color(0) {
+  }
+
+  Block::Block(
+    size_t id, float x, float y, float width, float height, uint32_t color) :
     base::BasicGameObject(x, y),
+    id(id),
     width(width),
     height(height),
     color(color) {
@@ -18,6 +28,14 @@ namespace game::commons {
   }
 
   void Block::run(void) {
-    this->x++;
+    /* do nothing */
+  }
+
+  size_t Block::get_id(void) {
+    return this->id;
+  }
+
+  Block Block::make_empty_block(void) {
+    return Block();
   }
 }

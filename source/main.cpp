@@ -27,29 +27,21 @@ int main() {
 
   /* test only */
   Matrix p1_matrix(30, 30);
-  p1_matrix.set_block(4, 4);
+  p1_matrix.create_block(0.0f, 0.0f);
+  p1_matrix.create_block(20.0f, 20.0f);
+  p1_matrix.create_block(100.0f, 100.0f);
+
+  p1_matrix.destroy_block_by_id(1);
+
   /* Setup game object */
   Renderer::add_child_to_stage(&p1_matrix);
-
+  size_t block_created = 0;
   while(true) {
     /* Clear screen */
     WPAD_ScanPads();
 
     Scheduler::execute();
     Renderer::render();
-
-    /* Update input */
-    if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_LEFT) {
-      x_position -= 1.0f;
-    } else if (WPAD_ButtonsHeld(0) & WPAD_BUTTON_RIGHT) {
-      x_position += 1.0f;
-    }
-
-    if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_UP) {
-      y_position -= 1.0f;
-    } else if(WPAD_ButtonsHeld(0) & WPAD_BUTTON_DOWN) {
-      y_position += 1.0f;
-    }
   }
 
   GRRLIB_Exit(); // Be a good boy, clear the memory allocated by GRRLIB
