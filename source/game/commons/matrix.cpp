@@ -3,6 +3,7 @@
 #include "draw.h"
 
 using namespace utils;
+using namespace game::commons;
 using namespace std;
 
 namespace game::commons {
@@ -20,14 +21,14 @@ namespace game::commons {
     /* do nothing for now */
   }
 
-  void Matrix::create_block(float x, float y) {
+  void Matrix::create_block(float x, float y, BlockColor color) {
     auto position = this->find_block_allocation_position();
 
     if (position != numeric_limits<size_t>::max()) {
       this->blocks[position] = Block(
         (this->block_counter++), x, y,
         Constants::block_width, Constants::block_height,
-        Draw::make_rgba(0, 0, 255, 255));
+        color);
 
       this->add_child(&this->blocks[position]);
     }
@@ -51,7 +52,7 @@ namespace game::commons {
           this->y + offset_y,
           Constants::block_width * Constants::matrix_width,
           Constants::block_height * Constants::matrix_height,
-          Draw::make_rgba(0, 0, 0, 32));
+          Draw::make_rgba(0, 0, 0, 12));
   }
 
   void Matrix::initialize_matrix(void) {

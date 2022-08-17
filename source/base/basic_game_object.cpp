@@ -7,6 +7,7 @@ namespace base {
     this->y = y;
   }
 
-  void BasicGameObject::render(float offset_x, float offset_y) { }
+  void BasicGameObject::render([[maybe_unused]] float offset_x,
+                               [[maybe_unused]] float offset_y) { }
   void BasicGameObject::run(void) { }
 }

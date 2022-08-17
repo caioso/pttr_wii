@@ -19,7 +19,7 @@ namespace game::commons {
     void render(float offset_x, float offset_y) override;
     void run() override;
 
-    void create_block(float x, float y);
+    void create_block(float x, float y, BlockColor color);
     void destroy_block_by_id(size_t id);
 
   private:
