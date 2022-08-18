@@ -1,13 +1,13 @@
 #pragma once
 
 /* includes */
-#include "../interfaces/renderable.h"
-#include "../interfaces/runnable.h"
+#include "components/renderable.h"
+#include "components/runnable.h"
 
 namespace base {
   class BasicGameObject :
-    public interfaces::Renderable,
-    public interfaces::Runnable {
+    public components::Renderable,
+    public components::Runnable {
   public:
     /* public methods */
     BasicGameObject(float x, float y);

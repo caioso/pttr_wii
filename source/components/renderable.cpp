@@ -3,7 +3,7 @@
 
 using namespace std;
 
-namespace interfaces {
+namespace components {
   void Renderable::add_child(Renderable * child) {
     auto target = std::find_if(
       begin(this->children), end(this->children),

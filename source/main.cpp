@@ -7,11 +7,13 @@
 #include "base/graphics/renderer.h"
 #include "game/commons/block.h"
 #include "game/commons/matrix.h"
+#include "game/red_cursor.h"
 #include "utils/draw.h"
 
 using namespace base::control;
 using namespace base::graphics;
 using namespace game::commons;
+using game::RedCursor;
 using namespace utils;
 
 int main() {
@@ -32,9 +34,12 @@ int main() {
   p1_matrix.create_block(240.0f, 100.0f, BlockColor::orange);
   p1_matrix.create_block(240.0f, 100.0f, BlockColor::purple);
 
+  RedCursor cursor(0, 0);
+
   /* Setup game object */
   Renderer::add_child_to_stage(&p1_matrix);
-  size_t block_created = 0;
+  cursor.spawn_cursor();
+
   while(true) {
     /* Clear screen */
     WPAD_ScanPads();

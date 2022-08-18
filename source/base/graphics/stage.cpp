@@ -5,5 +5,7 @@
 using namespace utils;
 
 namespace base::graphics {
-  Stage::Stage(void) : BasicGameObject(0.0f, 0.0f) { }
+  Stage::Stage(void) :
+    BasicGameObject(0.0f, 0.0f) {
+  }
 }

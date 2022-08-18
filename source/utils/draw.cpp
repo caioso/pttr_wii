@@ -10,4 +10,9 @@ namespace utils {
       float x, float y, float w, float h, uint32_t c) {
     GRRLIB_Rectangle(x, y, w, h, c, true);
   }
+
+  void Draw::draw_rectangle_outline(
+      float x, float y, float w, float h, uint32_t c) {
+    GRRLIB_Rectangle(x, y, w, h, c, false);
+  }
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace interfaces {
+namespace components {
   class Runnable {
   public:
     /* public methods */

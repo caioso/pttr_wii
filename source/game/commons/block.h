@@ -5,6 +5,8 @@
 #include <cstddef>
 #include <limits>
 #include "base/basic_game_object.h"
+#include "components/collider.h"
+
 
 namespace game::commons {
   enum class BlockColor : uint8_t {
@@ -18,12 +20,14 @@ namespace game::commons {
     no_color = 0x00
   };
 
-  class Block : public base::BasicGameObject {
+  class Block :
+    public base::BasicGameObject,
+    public components::Collider {
   public:
     /* public methodss */
     Block(void);
-    Block(
-      size_t id, float x, float y, float width, float height, BlockColor color);
+    Block(size_t id, float x, float y, float width, float height,
+    float collider_width, float collider_height, BlockColor color);
     ~Block() = default;
 
     void render(float offset_x, float offset_y) override;
@@ -39,8 +43,8 @@ namespace game::commons {
 
     /* private attributes */
     size_t id;
-    float width;
-    float height;
+    float render_width;
+    float render_height;
     BlockColor color;
   };
 }

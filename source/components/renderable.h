@@ -8,7 +8,7 @@ namespace base::graphics {
   class Renderer;
 }
 
-namespace interfaces {
+namespace components {
   class Renderable {
   friend base::graphics::Renderer;
   public:
@@ -19,7 +19,6 @@ namespace interfaces {
 
     /* abstract methods */
     virtual void render(float offset_x, float offset_y) = 0;
-
     /* Public attributes */
     float x;
     float y;

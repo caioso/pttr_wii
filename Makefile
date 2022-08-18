@@ -22,7 +22,7 @@ SOURCES		:=	source/base \
 							source/base/graphics \
 							source/game \
 							source/game/commons \
-							source/interfaces \
+							source/components \
 							source/gfx \
 							source/utils \
 							source

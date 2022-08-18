@@ -2,29 +2,32 @@
 #include "block.h"
 #include "utils/draw.h"
 
+using namespace base;
+using namespace components;
 using namespace utils;
 
 namespace game::commons {
   Block::Block(void) :
-    base::BasicGameObject(0, 0),
+    BasicGameObject(0, 0),
+    Collider(30.0f, 30.0f),
     id(std::numeric_limits<size_t>::max()),
-    width(0),
-    height(0),
     color(BlockColor::no_color) {
   }
 
   Block::Block(
-    size_t id, float x, float y, float width, float height, BlockColor color) :
-    base::BasicGameObject(x, y),
+    size_t id, float x, float y, float width, float height,
+    float collider_width, float collider_height, BlockColor color) :
+    BasicGameObject(x, y),
+    Collider(collider_width, collider_height),
     id(id),
-    width(width),
-    height(height),
+    render_width(width),
+    render_height(height),
     color(color) {
   }
 
   void Block::render(float offset_x, float offset_y) {
     Draw::draw_filled_rectangle(this->x + offset_x, this->y + offset_y,
-      this->width, this->height, this->block_color_to_rgba());
+      this->render_width, this->render_height, this->block_color_to_rgba());
   }
 
   void Block::run(void) {

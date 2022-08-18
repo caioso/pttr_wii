@@ -28,6 +28,7 @@ namespace game::commons {
       this->blocks[position] = Block(
         (this->block_counter++), x, y,
         Constants::block_width, Constants::block_height,
+        Constants::block_width, Constants::block_height,
         color);
 
       this->add_child(&this->blocks[position]);

@@ -4,7 +4,7 @@
 namespace base::control {
   void Scheduler::initialize(void) { }
 
-  void Scheduler::schedule(interfaces::Runnable * runnable) {
+  void Scheduler::schedule(components::Runnable * runnable) {
     Scheduler::tasks.push_back(runnable);
   }
 

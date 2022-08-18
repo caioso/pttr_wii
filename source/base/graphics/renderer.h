@@ -3,7 +3,9 @@
 /* includes */
 #include <cstddef>
 #include <vector>
-#include "interfaces/renderable.h"
+#include <tuple>
+#include "components/collider.h"
+#include "components/renderable.h"
 #include "stage.h"
 
 namespace base::graphics {
@@ -11,13 +13,16 @@ namespace base::graphics {
   public:
     /* public methods */
     static void initialize(void);
-    static void add_child_to_stage(interfaces::Renderable * child);
+    static void add_child_to_stage(components::Renderable * child);
     static void render(void);
+    static void render_bounding_boxes(components::Collider * collider);
 
   private:
     /* private methods */
+    static std::tuple<float, float> calculate_position_offset(
+      components::Renderable * renderable);
     static void render_parent_and_children(
-      interfaces::Renderable * parent, float offset_x, float offset_y);
+      components::Renderable * parent, float offset_x, float offset_y);
 
     /* private attributes */
     inline static Stage main_stage;
