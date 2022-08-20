@@ -1,26 +1,29 @@
 /* includes */
-#include "renderable.h"
+#include "game_object.h"
 
 using namespace std;
 
-namespace components {
-  void Renderable::add_child(Renderable * child) {
+namespace base {
+ void GameObject::add_child(GameObject * child) {
     auto target = std::find_if(
       begin(this->children), end(this->children),
-      [child](Renderable * r) -> bool { return child == r; });
+      [child](GameObject * r) -> bool { return child == r; });
 
     if (target == end(this->children)) {
       this->children.push_back(child);
+      child->parent = this;
     }
   }
 
-  void Renderable::remove_child(Renderable * child) {
+  void GameObject::remove_child(GameObject * child) {
     auto target = std::find_if(
       begin(this->children), end(this->children),
-      [child](Renderable * r) -> bool { return child == r; });
+      [child](GameObject * r) -> bool { return child == r; });
 
     if (target != end(this->children)) {
       this->children.erase(target);
+      (*target)->parent = nullptr;
     }
   }
 }
+

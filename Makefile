@@ -20,6 +20,7 @@ BUILD		:=	build
 SOURCES		:=	source/base \
 							source/base/control \
 							source/base/graphics \
+							source/base/physics \
 							source/game \
 							source/game/commons \
 							source/components \

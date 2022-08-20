@@ -1,8 +1,10 @@
 /* includes */
 #include "matrix.h"
 #include "draw.h"
+#include "physics/collision_detector.h"
 
 using namespace utils;
+using namespace base::physics;
 using namespace game::commons;
 using namespace std;
 
@@ -31,9 +33,9 @@ namespace game::commons {
         Constants::block_width, Constants::block_height,
         color);
 
+      CollisionDetector::register_collider(&this->blocks[position]);
       this->add_child(&this->blocks[position]);
     }
-
   }
 
   void Matrix::destroy_block_by_id(size_t id) {
@@ -44,13 +46,14 @@ namespace game::commons {
       auto position = distance(begin(this->blocks), target);
       this->remove_child(&this->blocks[position]);
       this->blocks[position] = Block::make_empty_block();
+      /* Remove Colliders Here */
     }
   }
 
   void Matrix::render_matrix_background(float offset_x, float offset_y) {
     Draw::draw_filled_rectangle(
-          this->x + offset_x,
-          this->y + offset_y,
+          this->pos.x + offset_x,
+          this->pos.y + offset_y,
           Constants::block_width * Constants::matrix_width,
           Constants::block_height * Constants::matrix_height,
           Draw::make_rgba(0, 0, 0, 12));

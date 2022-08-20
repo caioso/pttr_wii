@@ -29,12 +29,12 @@ int main() {
   p1_matrix.create_block(0.0f, 0.0f, BlockColor::red);
   p1_matrix.create_block(20.0f, 20.0f, BlockColor::yellow);
   p1_matrix.create_block(100.0f, 100.0f, BlockColor::green);
-  p1_matrix.create_block(40.0f, 100.0f, BlockColor::light_blue);
   p1_matrix.create_block(140.0f, 100.0f, BlockColor::dark_blue);
   p1_matrix.create_block(240.0f, 100.0f, BlockColor::orange);
   p1_matrix.create_block(240.0f, 100.0f, BlockColor::purple);
+  p1_matrix.create_block(40.0f, 100.0f, BlockColor::light_blue);
 
-  RedCursor cursor(0, 0);
+  RedCursor cursor(2, 2);
 
   /* Setup game object */
   Renderer::add_child_to_stage(&p1_matrix);

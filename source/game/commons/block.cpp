@@ -9,7 +9,7 @@ using namespace utils;
 namespace game::commons {
   Block::Block(void) :
     BasicGameObject(0, 0),
-    Collider(30.0f, 30.0f),
+    Collider(30.0f, 30.0f, &this->pos),
     id(std::numeric_limits<size_t>::max()),
     color(BlockColor::no_color) {
   }
@@ -18,7 +18,7 @@ namespace game::commons {
     size_t id, float x, float y, float width, float height,
     float collider_width, float collider_height, BlockColor color) :
     BasicGameObject(x, y),
-    Collider(collider_width, collider_height),
+    Collider(collider_width, collider_height, &this->pos),
     id(id),
     render_width(width),
     render_height(height),
@@ -26,7 +26,7 @@ namespace game::commons {
   }
 
   void Block::render(float offset_x, float offset_y) {
-    Draw::draw_filled_rectangle(this->x + offset_x, this->y + offset_y,
+    Draw::draw_filled_rectangle(this->pos.x + offset_x, this->pos.y + offset_y,
       this->render_width, this->render_height, this->block_color_to_rgba());
   }
 
