@@ -6,7 +6,7 @@
 #include <limits>
 #include "base/basic_game_object.h"
 #include "components/collider.h"
-
+#include "utils/point2d.h"
 
 namespace game::commons {
   enum class BlockColor : uint8_t {
@@ -20,10 +20,24 @@ namespace game::commons {
     no_color = 0x00
   };
 
+  class BlockRenderer {
+  public:
+    BlockRenderer() = default;
+    ~BlockRenderer() = default;
+    void render_block(utils::Point2D pos, float width, float height,
+      float offset_x, float offset_y, BlockColor color);
+
+  private:
+    /* private methods */
+    uint32_t block_color_to_rgba(BlockColor color);
+
+  };
+
   class Block :
     public base::BasicGameObject,
     public components::Collider {
   public:
+    friend class BlockRenderer;
     /* public methodss */
     Block(void);
     Block(size_t id, float x, float y, float width, float height,
@@ -38,10 +52,8 @@ namespace game::commons {
     static Block make_empty_block(void);
 
   private:
-    /* private methods */
-    uint32_t block_color_to_rgba(void);
-
     /* private attributes */
+    BlockRenderer block_renderer;
     size_t id;
     float render_width;
     float render_height;

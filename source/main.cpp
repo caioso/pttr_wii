@@ -34,7 +34,7 @@ int main() {
   p1_matrix.create_block(240.0f, 100.0f, BlockColor::purple);
   p1_matrix.create_block(40.0f, 100.0f, BlockColor::light_blue);
 
-  RedCursor cursor(2, 2);
+  RedCursor cursor(200, 60);
 
   /* Setup game object */
   Renderer::add_child_to_stage(&p1_matrix);
