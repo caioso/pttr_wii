@@ -34,8 +34,8 @@ INCLUDES	:= $(SOURCES)
 # options for code generation
 #---------------------------------------------------------------------------------
 
-CFLAGS	= -g -O3 -Wall $(MACHDEP) $(INCLUDE)
-CXXFLAGS	=	$(CFLAGS) -std=c++2a -Wextra
+CFLAGS	= -O3 -Wall $(MACHDEP) $(INCLUDE)
+CXXFLAGS	=	$(CFLAGS) -std=c++20 -Wextra
 
 #LDFLAGS	=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map
 LDFLAGS = -g $(MACHDEP) -Wl,-Map,$(notdir $@).map -Wl,--section-start,.init=0x81000000

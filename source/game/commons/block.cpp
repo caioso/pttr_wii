@@ -1,5 +1,6 @@
 /* includes */
 #include "block.h"
+#include "game/constants.h"
 #include "utils/draw.h"
 
 using namespace base;
@@ -37,7 +38,7 @@ namespace game::commons {
 
   Block::Block(void) :
     BasicGameObject(0, 0),
-    Collider(30.0f, 30.0f, &this->pos),
+    Collider(Constants::block_width, Constants::block_height, &this->pos),
     id(std::numeric_limits<size_t>::max()),
     color(BlockColor::no_color) {
   }
@@ -54,7 +55,9 @@ namespace game::commons {
   }
 
   void Block::render(float offset_x, float offset_y) {
-    this->block_renderer.render_block(this->pos, this->render_width, this->render_height, offset_x, offset_y, this->color);
+    this->block_renderer.render_block(
+      this->pos, this->render_width,
+      this->render_height, offset_x, offset_y, this->color);
   }
 
   void Block::run(void) {

@@ -1,4 +1,5 @@
 /* includes */
+#include <math.h>
 #include "collision_detector.h"
 #include "base/basic_game_object.h"
 
@@ -21,8 +22,8 @@ namespace base::physics {
     }
   }
 
-  bool CollisionDetector::detect_collision(GameObject * target) {
-    auto collided = false;
+  optional<Point2D> CollisionDetector::detect_collision(GameObject * target) {
+    optional<Point2D> collision_information = nullopt;
 
     if (auto target_collider = dynamic_cast<Collider*>(target);
         target_collider != nullptr) {
@@ -42,14 +43,17 @@ namespace base::physics {
               candidate_position.y + candidate_collider->bounding_box_height) &&
               (target_position.y + target_collider->bounding_box_height >
                candidate_position.y)) {
-            collided = true;
+
+            collision_information.emplace(
+              abs(target_position.x - candidate_position.x),
+              abs(target_position.y - candidate_position.y));
             break;
           }
         }
       }
     }
 
-    return collided;
+    return collision_information;
   }
 
   Point2D CollisionDetector::local_to_world_position(GameObject * game_object) {

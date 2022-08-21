@@ -2,6 +2,7 @@
 
 /* includes */
 #include <algorithm>
+#include <optional>
 #include <vector>
 
 #include "base/game_object.h"
@@ -12,7 +13,8 @@ namespace base::physics {
   class CollisionDetector {
   public:
     static void register_collider(base::GameObject * collider);
-    static bool detect_collision(base::GameObject * target_collider);
+    static std::optional<utils::Point2D> detect_collision(
+      base::GameObject * target_collider);
 
   private:
     static utils::Point2D local_to_world_position(
