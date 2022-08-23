@@ -1,4 +1,5 @@
 #include <grrlib.h>
+#include <array>
 #include <wiiuse/wpad.h>
 
 /* Engine Includes */
@@ -14,6 +15,7 @@ using namespace base::control;
 using namespace base::graphics;
 using namespace game::commons;
 using game::RedCursor;
+using game::Constants;
 using namespace utils;
 
 int main() {
@@ -25,14 +27,23 @@ int main() {
   Scheduler::initialize();
 
   /* test only */
+  std::array<
+      std::array<BlockColor, Constants::matrix_height>,
+        Constants::matrix_width> matrix_template = {};
+
+  for (size_t i = 0; i < Constants::matrix_height; i++) {
+    for (size_t j = 0; j < Constants::matrix_width; j++) {
+      matrix_template[i][j] = BlockColor::no_color;
+    }
+  }
+
+  matrix_template[0][0] = BlockColor::red;
+  matrix_template[0][9] = BlockColor::yellow;
+  matrix_template[19][0] = BlockColor::green;
+  matrix_template[19][9] = BlockColor::light_blue;
+
   Matrix p1_matrix(30, 30);
-  p1_matrix.create_block(0.0f, 0.0f, BlockColor::red);
-  p1_matrix.create_block(20.0f, 20.0f, BlockColor::yellow);
-  p1_matrix.create_block(100.0f, 100.0f, BlockColor::green);
-  p1_matrix.create_block(140.0f, 100.0f, BlockColor::dark_blue);
-  p1_matrix.create_block(240.0f, 100.0f, BlockColor::orange);
-  p1_matrix.create_block(240.0f, 100.0f, BlockColor::purple);
-  p1_matrix.create_block(40.0f, 100.0f, BlockColor::light_blue);
+  p1_matrix.initialize_matrix(matrix_template);
 
   RedCursor cursor(200, 60);
 

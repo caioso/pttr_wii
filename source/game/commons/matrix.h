@@ -19,7 +19,11 @@ namespace game::commons {
     void render(float offset_x, float offset_y) override;
     void run() override;
 
-    void create_block(float x, float y, BlockColor color);
+    void initialize_matrix(
+      std::array<
+        std::array<BlockColor, Constants::matrix_height>,
+          Constants::matrix_width>& initialization_template);
+    void create_block(int x, int y, BlockColor color);
     void destroy_block_by_id(size_t id);
 
   private:

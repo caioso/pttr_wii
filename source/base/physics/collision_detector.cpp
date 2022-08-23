@@ -2,9 +2,11 @@
 #include <math.h>
 #include "collision_detector.h"
 #include "base/basic_game_object.h"
+#include "game/constants.h"
 
 using namespace base;
 using namespace components;
+using namespace game;
 using namespace utils;
 using namespace std;
 
@@ -24,31 +26,20 @@ namespace base::physics {
 
   optional<Point2D> CollisionDetector::detect_collision(GameObject * target) {
     optional<Point2D> collision_information = nullopt;
+    auto target_position = CollisionDetector::local_to_world_position(target);
 
-    if (auto target_collider = dynamic_cast<Collider*>(target);
-        target_collider != nullptr) {
-      auto target_position = CollisionDetector::local_to_world_position(target);
-
-      for (auto candidate : CollisionDetector::colliders) {
-        if (target != candidate) {
-          auto candidate_collider = dynamic_cast<Collider*>(candidate);
-          auto candidate_position =
-            CollisionDetector::local_to_world_position(candidate);
-
-          if ((target_position.x <
-              candidate_position.x + candidate_collider->bounding_box_width) &&
-              (target_position.x + target_collider->bounding_box_width >
-              candidate_position.x) &&
-              (target_position.y <
-              candidate_position.y + candidate_collider->bounding_box_height) &&
-              (target_position.y + target_collider->bounding_box_height >
-               candidate_position.y)) {
-
-            collision_information.emplace(
-              abs(target_position.x - candidate_position.x),
-              abs(target_position.y - candidate_position.y));
-            break;
-          }
+    for (auto candidate : CollisionDetector::colliders) {
+      if (target != candidate) {
+        auto candidate_position =
+          CollisionDetector::local_to_world_position(candidate);
+        if ((target_position.x < candidate_position.x + Constants::block_width) &&
+            (target_position.x + Constants::block_width > candidate_position.x) &&
+            (target_position.y < candidate_position.y + Constants::block_height) &&
+            (target_position.y + Constants::block_height > candidate_position.y)){
+          collision_information.emplace(
+            abs(target_position.x - candidate_position.x),
+            abs(target_position.y - candidate_position.y));
+          break;
         }
       }
     }

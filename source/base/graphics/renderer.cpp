@@ -37,16 +37,6 @@ namespace base::graphics {
       if (child != nullptr) {
         Renderer::render_parent_and_children(
           child, parent->pos.x, parent->pos.y);
-
-        /* Render collider if enabled and if the target
-        * game object has a collider */
-        if (auto collider = dynamic_cast<Collider*>(child);
-            collider != nullptr) {
-          Draw::draw_rectangle_outline(
-            parent->pos.x + child->pos.x, parent->pos.y + child->pos.y,
-            collider->bounding_box_width, collider->bounding_box_height,
-              Draw::make_rgba(0, 0, 0, 255));
-        }
       }
     }
   }

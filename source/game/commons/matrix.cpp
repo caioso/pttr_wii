@@ -5,6 +5,7 @@
 
 using namespace utils;
 using namespace base::physics;
+using namespace game;
 using namespace game::commons;
 using namespace std;
 
@@ -23,15 +24,28 @@ namespace game::commons {
     /* do nothing for now */
   }
 
-  void Matrix::create_block(float x, float y, BlockColor color) {
+  void Matrix::initialize_matrix(
+      std::array<
+        std::array<BlockColor, Constants::matrix_height>,
+          Constants::matrix_width>& initialization_template) {
+    for (auto i = 0llu; i < Constants::matrix_height; ++i) {
+      for (auto j = 0llu; j < Constants::matrix_width; ++j) {
+        if (initialization_template[i][j] != BlockColor::no_color) {
+          create_block(j, i, initialization_template[i][j]);
+        }
+      }
+    }
+  }
+
+  void Matrix::create_block(int x, int y, BlockColor color) {
     auto position = this->find_block_allocation_position();
 
     if (position != numeric_limits<size_t>::max()) {
       this->blocks[position] = Block(
-        (this->block_counter++), x, y,
-        Constants::block_width, Constants::block_height,
-        Constants::block_width, Constants::block_height,
-        color);
+        (this->block_counter++), x * Constants::block_width,
+        y * Constants::block_height, Constants::block_width,
+        Constants::block_height, Constants::block_width,
+        Constants::block_height, color);
 
       CollisionDetector::register_collider(&this->blocks[position]);
       this->add_child(&this->blocks[position]);
